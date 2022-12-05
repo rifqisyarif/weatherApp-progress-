@@ -56,4 +56,9 @@ dependencies {
 
     // GSON converter - JSON Reader
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Fused Location - Get Device's Last Know Location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+
 }
