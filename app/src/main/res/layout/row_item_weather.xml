@@ -40,7 +40,7 @@
             android:id="@+id/item_weather"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:src="@color/black"
+            android:background="@drawable/bg_icon_weather"
             app:layout_constraintTop_toBottomOf="@id/tv_item_time"
             app:layout_constraintBottom_toTopOf="@id/tv_max_degree"
             app:layout_constraintStart_toStartOf="parent"

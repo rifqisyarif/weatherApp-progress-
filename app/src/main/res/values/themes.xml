@@ -16,7 +16,7 @@
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">20sp</item>
-        <item name="editTextColor">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="tint">@color/white</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>

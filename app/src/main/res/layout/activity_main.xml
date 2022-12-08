@@ -7,86 +7,101 @@
     android:background="@drawable/fog"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_bg_weather"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_weather"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_ic_weather"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:src="@color/black"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_bg_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_ic_weather"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/bg_icon_weather"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_degree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:maxLines="2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/img_ic_weather" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:textAlignment="center"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_degree" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weather"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="64dp"
+            tools:listitem="@layout/row_item_weather"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/search_city"
+            app:layout_constraintTop_toBottomOf="@id/tv_city" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_city"
+            android:layout_width="match_parent"
+            app:defaultQueryHint="@string/txt_search_another_location"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="text"
+            app:theme="@style/SearchViewStyle"
+            app:iconifiedByDefault="false"
+            android:layout_height="50dp"
+            android:layout_marginBottom="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@id/search_city"
+            app:layout_constraintEnd_toEndOf="@id/search_city"
+            app:layout_constraintTop_toBottomOf="@id/search_city"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_degree"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
-        android:maxLines="2"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/img_ic_weather" />
-
-    <TextView
-        android:id="@+id/tv_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:text="cileungsi"
-        android:textAlignment="center"
-        android:textSize="38sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tv_degree" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_weather"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="64dp"
-        tools:listitem="@layout/row_item_weather"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="horizontal"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@id/search_city"
-        app:layout_constraintTop_toBottomOf="@id/tv_city" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_city"
-        android:layout_width="match_parent"
-        app:defaultQueryHint="@string/txt_search_another_location"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:inputType="text"
-        app:theme="@style/SearchViewStyle"
-        app:iconifiedByDefault="false"
-        android:layout_height="50dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/white"
-        android:layout_marginTop="2dp"
-        app:layout_constraintStart_toStartOf="@id/search_city"
-        app:layout_constraintEnd_toEndOf="@id/search_city"
-        app:layout_constraintTop_toBottomOf="@id/search_city"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

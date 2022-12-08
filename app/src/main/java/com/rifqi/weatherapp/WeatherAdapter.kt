@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rifqi.weatherapp.databinding.RowItemWeatherBinding
 import com.rifqi.weatherapp.model.ListItem
+import com.rifqi.weatherapp.utils.ICON_BASE_URL
+import com.rifqi.weatherapp.utils.ICON_SIZE_2X
 import com.rifqi.weatherapp.utils.degreeToCelsius
 import java.text.Format
 import java.text.SimpleDateFormat
@@ -58,15 +61,23 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherAdapter.MyViewHolder>() {
             tvItemDate.text = dateResult
             tvItemTime.text = timeResult
 
-            val maxTemp = "Max " + degreeToCelsius(data.main?.tempMax)
-            val minTemp = "Min " + degreeToCelsius(data.main?.tempMin)
+            val maxTemp = "${data.main?.tempMax}°C"
+            val minTemp = "${data.main?.tempMin}°C"
             tvMaxDegree.text = maxTemp
             tvMinDegree.text = minTemp
+
+            val imageUrl = ICON_BASE_URL + data.weather?.get(0)?.icon + ICON_SIZE_2X
+            Glide.with(itemWeather.context).load(imageUrl).into(itemWeather)
         }
     }
 
     // Menghitung/menentukan jumlah data yang ada di list_data untuk memberitahukan agar
     // adapter menyediakan layout row_item sejumlah data tersebut
     override fun getItemCount() = listWeather.size
+    fun setData(list: List<ListItem>?) {
+        if (list == null) return
+        listWeather.clear()
+        listWeather.addAll(list)
+    }
 
 }
