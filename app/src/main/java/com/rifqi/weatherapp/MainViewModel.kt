@@ -31,4 +31,23 @@ class MainViewModel : ViewModel(){
 
         })
     }
+
+    fun weatherByCurrentLocation(lat: Double, lon: Double) {
+        ApiConfig.getApiService().weatherByCurrentLocation(lat, lon)
+            .enqueue(object : Callback<WeatherResponse> {
+                override fun onResponse(
+                    call: Call<WeatherResponse>,
+                    response: Response<WeatherResponse>
+                ) {
+                    if (response.isSuccessful) weatherByCurrentLocation.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
+    fun getWeatherByCurrentLocation(): LiveData<WeatherResponse> = weatherByCurrentLocation
+
 }
